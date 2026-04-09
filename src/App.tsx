@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { SearchAssistant } from './components/SearchAssistant';
 import { ProductCard } from './components/ProductCard';
 import { products } from './services/mockData';
+import { CartDrawer } from './components/CartDrawer';
 import { getRecommendations } from './services/ai';
 import type { Recommendation } from './types';
 
@@ -37,6 +38,7 @@ function App() {
   return (
     <div className="min-h-screen bg-zinc-900 text-zinc-50 selection:bg-emerald-500/30 pb-20">
       <Header />
+      <CartDrawer />
       
       <main className="max-w-7xl mx-auto px-8 py-12 md:py-20">
         <section className="text-center space-y-4 mb-12">
