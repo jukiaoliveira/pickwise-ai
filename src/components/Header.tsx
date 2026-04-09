@@ -1,6 +1,14 @@
-import { ShoppingBag, User, Search } from 'lucide-react';
+import { ShoppingBag, User } from 'lucide-react';
+// Import o nosso hook do Zustand
+import { useCartStore } from '../store/useCartStore';
 
 export const Header = () => {
+  // extraí os items do estado global
+  const items = useCartStore((state) => state.items);
+  
+  // calcula a quantidade total de peças (somando a 'quantity' de cada item)
+  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <header className="w-full py-6 px-8 flex items-center justify-between border-b border-zinc-800 bg-zinc-900/50 backdrop-blur-md sticky top-0 z-50">
       <div className="flex items-center gap-2">
@@ -24,9 +32,12 @@ export const Header = () => {
         </button>
         <button className="text-zinc-400 hover:text-white transition-colors relative">
           <ShoppingBag size={20} />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 text-[10px] font-bold text-zinc-900 rounded-full flex items-center justify-center">
-            0
-          </span>
+          {/* 4. Só mostramos a bolinha verde se tiver algum item no carrinho */}
+          {totalItems > 0 && (
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 text-[10px] font-bold text-zinc-900 rounded-full flex items-center justify-center animate-in zoom-in duration-300">
+              {totalItems}
+            </span>
+          )}
         </button>
       </div>
     </header>
