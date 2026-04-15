@@ -136,7 +136,7 @@ export const products: Product[] = [
     description: 'O corte social encontrou o streetwear. Cintura elástica, pregas frontais e tecido fluido.',
     price: 289.90,
     category: 'pants',
-    imageUrl: 'https://images.unsplash.com/photo-1594938298596-03bf315f4e1f?w=500&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1694447814836-c93ab70f7398?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     tags: ['elegante', 'social', 'festa', 'trabalho', 'moderno', 'alfaiataria']
   },
   {
