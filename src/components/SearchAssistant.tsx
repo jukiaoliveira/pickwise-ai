@@ -8,12 +8,11 @@ interface SearchAssistantProps {
 
 export const SearchAssistant = ({ onSearch, isLoading }: SearchAssistantProps) => {
   const [prompt, setPrompt] = useState('');
-  
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInput = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'; 
+      textareaRef.current.style.height = 'auto';
       textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`;
     }
   };
@@ -31,21 +30,21 @@ export const SearchAssistant = ({ onSearch, isLoading }: SearchAssistantProps) =
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault(); // Evita que pule de linha
+      e.preventDefault();
       handleSubmit();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto mt-12 px-4">
-      <div className="relative group">
-        <div className={`absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl blur opacity-20 transition duration-1000 ${isLoading ? 'animate-pulse opacity-60' : 'group-focus-within:opacity-40'}`}></div>
+    <form onSubmit={handleSubmit} className="w-full max-w-2xl mx-auto px-4">
+      <div className="relative group mt-2">
+        <div className={`absolute -inset-0.5 bg-gradient-to-r from-br-green to-br-blue rounded-2xl blur opacity-30 transition duration-1000 ${isLoading ? 'animate-pulse opacity-70' : 'group-focus-within:opacity-60'}`}></div>
         
-        <div className="relative flex items-end bg-zinc-800 rounded-2xl border border-zinc-700 overflow-hidden transition-all">
-          <div className="pl-5 pb-[22px] text-emerald-400">
+        <div className="relative flex items-end bg-br-card rounded-2xl border border-br-green/30 overflow-hidden transition-all shadow-xl shadow-br-dark/50">
+          <div className="pl-5 pb-[22px] text-br-green">
             {isLoading ? <Loader2 size={20} className="animate-spin" /> : <Sparkles size={20} />}
           </div>
-        
+          
           <textarea 
             ref={textareaRef}
             value={prompt}
@@ -53,24 +52,24 @@ export const SearchAssistant = ({ onSearch, isLoading }: SearchAssistantProps) =
             onKeyDown={handleKeyDown}
             disabled={isLoading}
             rows={1}
-            placeholder="Ex: Quero um look para um festival de noite..."
-            className="w-full bg-transparent border-none py-5 px-4 text-zinc-100 placeholder:text-zinc-500 focus:outline-none text-lg disabled:opacity-50 resize-none overflow-y-auto"
+            placeholder="Ex: Quero um look autêntico para um festival à noite..."
+            className="w-full bg-transparent border-none py-5 px-4 text-br-light placeholder:text-zinc-500 focus:outline-none text-lg disabled:opacity-50 resize-none overflow-y-auto font-baloo"
             style={{ minHeight: '68px', maxHeight: '200px' }}
           />
           
           <button 
             type="submit"
             disabled={isLoading || prompt.trim().length < 3}
-            className="bg-emerald-500 hover:bg-emerald-400 disabled:bg-zinc-600 disabled:text-zinc-400 text-zinc-900 font-bold py-3 px-6 mr-2 mb-2 rounded-xl transition-all active:scale-95 whitespace-nowrap h-[52px]"
+            className="bg-br-yellow hover:bg-yellow-400 disabled:bg-zinc-800 disabled:text-zinc-500 text-br-dark font-bebas text-2xl tracking-widest py-2 px-8 mr-2 mb-2 rounded-xl transition-all active:scale-95 whitespace-nowrap h-[52px] uppercase shadow-md shadow-br-yellow/20 disabled:shadow-none"
           >
-            {isLoading ? 'Buscando...' : 'Perguntar'}
+            {isLoading ? 'Buscando' : 'Mandar'}
           </button>
         </div>
       </div>
-      <p className="text-center text-zinc-500 text-xs mt-4 flex items-center justify-center gap-2">
-        <span>Pressione <strong>Enter</strong> para enviar</span>
-        <span className="w-1 h-1 bg-zinc-600 rounded-full"></span>
-        <span><strong>Shift + Enter</strong> para quebrar linha</span>
+      <p className="text-center text-zinc-500 text-sm mt-4 flex items-center justify-center gap-2 font-baloo">
+        <span>Aperte <strong className="text-br-light">Enter</strong> para enviar</span>
+        <span className="w-1 h-1 bg-br-green/50 rounded-full"></span>
+        <span><strong className="text-br-light">Shift + Enter</strong> para quebrar linha</span>
       </p>
     </form>
   );
