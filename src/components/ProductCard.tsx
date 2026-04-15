@@ -1,6 +1,5 @@
 import type { Product } from '../types';
 import { ShoppingBag } from 'lucide-react';
-// 1. Importamos o hook
 import { useCartStore } from '../store/useCartStore';
 
 interface ProductCardProps {
@@ -8,7 +7,6 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  // extraí APENAS a função de adicionar do estado global
   const addToCart = useCartStore((state) => state.addToCart);
 
   const formattedPrice = new Intl.NumberFormat('pt-BR', {
@@ -17,20 +15,22 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   }).format(product.price);
 
   return (
-    <div className="group flex flex-col bg-zinc-800/50 border border-zinc-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-colors duration-300">
-      <div className="relative aspect-[4/5] overflow-hidden bg-zinc-800">
+    // Fundo verde card e borda hover neon
+    <div className="group flex flex-col bg-br-card/80 border border-br-green/10 rounded-2xl overflow-hidden hover:border-br-green/50 transition-all duration-300 shadow-lg hover:shadow-br-green/10">
+      <div className="relative aspect-[4/5] overflow-hidden bg-br-dark">
         <img 
           src={product.imageUrl} 
           alt={product.name}
-          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
         />
-        <div className="absolute top-4 left-4 bg-zinc-900/80 backdrop-blur-sm text-zinc-300 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">
+        
+        <div className="absolute top-4 left-4 bg-br-dark/90 backdrop-blur-md text-br-green font-bebas text-sm uppercase tracking-widest py-1 px-3 rounded-md border border-br-green/20">
           {product.category}
         </div>
       </div>
 
       <div className="p-5 flex flex-col flex-grow">
-        <h3 className="text-lg font-bold text-zinc-100 leading-tight mb-2">
+        <h3 className="text-xl font-bold text-br-light leading-tight mb-2">
           {product.name}
         </h3>
         
@@ -38,17 +38,17 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           {product.description}
         </p>
 
-        <div className="flex items-center justify-between mt-auto pt-4 border-t border-zinc-800/50">
-          <span className="text-xl font-black text-emerald-400">
+        <div className="flex items-center justify-between mt-auto pt-4 border-t border-br-green/10">
+        
+          <span className="text-2xl font-bebas tracking-wide text-br-yellow">
             {formattedPrice}
           </span>
           <button 
-            // evento de clique que chama a função da store
             onClick={() => addToCart(product)}
-            className="w-10 h-10 bg-zinc-800 hover:bg-emerald-500 hover:text-zinc-900 rounded-xl flex items-center justify-center text-zinc-400 transition-colors active:scale-95"
+            className="w-11 h-11 bg-br-dark hover:bg-br-yellow hover:text-br-dark border border-br-green/20 hover:border-br-yellow rounded-xl flex items-center justify-center text-br-green transition-all active:scale-95"
             title="Adicionar à sacola"
           >
-            <ShoppingBag size={18} />
+            <ShoppingBag size={20} />
           </button>
         </div>
       </div>
